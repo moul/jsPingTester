@@ -15,20 +15,20 @@ $(function () {
             },
             complete: function (data, status) {
                 responseTime = new Date().getTime();
-                ping = Math.abs(requestTime - responseTime);
-                if (status === 'timeout' || status === 'abort' || ping > ($('#tval').val()-50)) {
+                pingDelay = Math.abs(requestTime - responseTime);
+                if (status === 'timeout' || status === 'abort' || pingDelay > ($('#tval').val()-50)) {
                     chart.series[0].addPoint({x:responseTime / 1000, y: average, marker: {radius: 5, fillColor: '#c00'}});
                     b = b + 1;
                 } else {
                     chart.series[0].addPoint([responseTime / 1000, ping]);
                     g = g + 1;
-                    average = Math.round((average*(g)+ping)/(g+1));
+                    average = Math.round((average*(g)+pingDelay)/(g+1));
                     $('#average').text(average);
                 }
                 chart.series[1].setData([{name:'Good ('+g+')', y:g, color: '#0c0'}, {name:'Bad ('+b+')', y:b, color: '#c00'}]);
                 if (b > 0 && g > 0)
                     $('#badper').text(Math.round(b*100/(g+b)));
-                $('#lastping').text(ping);
+                $('#lastping').text(pingDelay);
             }
         });
     }
