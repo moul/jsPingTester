@@ -20,7 +20,7 @@ $(function () {
                     chart.series[0].addPoint({x:responseTime / 1000, y: average, marker: {radius: 5, fillColor: '#c00'}});
                     b = b + 1;
                 } else {
-                    chart.series[0].addPoint([responseTime / 1000, ping]);
+                    chart.series[0].addPoint([responseTime / 1000, pingDelay]);
                     g = g + 1;
                     average = Math.round((average*(g)+pingDelay)/(g+1));
                     $('#average').text(average);
