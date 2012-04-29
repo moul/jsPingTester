@@ -4,6 +4,24 @@ $(function () {
     var b = 0;
     var average = 30;
 
+
+    function exportUrl() {
+        var points = [],
+        url = window.location.href,
+        hash = window.location.hash,
+        index_of_hash = url.indexOf(hash) || url.length,
+        hashless_url = url.substr(0, index_of_hash),
+        x, y, color;
+
+        $.each(chart.series[0].data, function(key, point) {
+                   x = point.x;
+                   y = point.y;
+                   color = point.marker && point.marker.fillColor == '#c00' ? 'b' : 'g';
+                   points.push([x, y, color]);
+               });
+        return hashless_url + '#' + points;
+    }
+
     function ping() {
         $.ajax({
             url: 'http://' + $('#host').val().replace('{rand}', Math.random()),
