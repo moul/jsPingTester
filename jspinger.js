@@ -6,7 +6,7 @@ $(function () {
 
     function ping() {
         $.ajax({
-            url: 'http://' + $('#host').val().replace('{rand}', Math.random() + '.html'),
+            url: 'http://' + $('#host').val().replace('{rand}', Math.random()),
             type: 'GET',
             dataType: 'html',
             timeout: $('#tval').val(),
@@ -28,7 +28,7 @@ $(function () {
                 chart.series[1].setData([{name:'Good ('+g+')', y:g, color: '#0c0'}, {name:'Bad ('+b+')', y:b, color: '#c00'}]);
                 if (b > 0 && g > 0)
                     $('#badper').text(Math.round(b*100/(g+b)));
-                $('#lastping').text(ping);          
+                $('#lastping').text(ping);
             }
         });
     }
@@ -95,7 +95,7 @@ $(function () {
 
         ping();
         loop = setInterval(ping, $('#pval').val()*1000);
-        
+
         $('#pval').change(function() {
             clearInterval(loop);
             loop = setInterval(ping, $('#pval').val()*1000);
