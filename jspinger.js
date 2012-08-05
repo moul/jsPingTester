@@ -32,9 +32,10 @@ $(function () {
                 requestTime = new Date().getTime();
             },
             complete: function (data, status) {
+console.log(data);
                 responseTime = new Date().getTime();
                 pingDelay = Math.abs(requestTime - responseTime);
-                if (status === 'timeout' || status === 'abort' || pingDelay > ($('#tval').val()-50)) {
+                if (status === 'timeout' || status === 'abort' || pingDelay > ($('#tval').val()-50) || (data.status != 200 && data.status != 404)) {
                     chart.series[0].addPoint({x:responseTime / 1000, y: average, marker: {radius: 5, fillColor: '#c00'}});
                     b = b + 1;
                 } else {
