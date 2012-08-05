@@ -24,7 +24,7 @@ $(function () {
 
     function ping() {
         $.ajax({
-            url: 'http://' + $('#host').val().replace('{rand}', Math.random()),
+            url: $('#host').val().replace('{rand}', Math.random()),
             type: 'GET',
             dataType: 'html',
             timeout: $('#tval').val(),
